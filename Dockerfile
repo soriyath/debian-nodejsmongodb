@@ -15,7 +15,7 @@ RUN DEBIAN_FRONTEND=noninteractive wget https://nodejs.org/dist/v5.11.1/node-v5.
 	&& tar -xzvf node-v5.11.1.tar.gz && rm -f node-v5.11.1.tar.gz \
 	&& cd node-v5.11.1 \
 	&& ./configure \
-	&& make \
+	&& make -j $(cat /proc/cpuinfo | grep processor | wc -l)\
 	&& make install
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean \
 	&& apt-get autoremove \
