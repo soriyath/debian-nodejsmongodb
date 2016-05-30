@@ -12,7 +12,7 @@ RUN	DEBIAN_FRONTEND=noninteractive set -ex \
 	&& apt-get install -y wget build-essential
 WORKDIR /usr/local/src
 RUN DEBIAN_FRONTEND=noninteractive wget https://nodejs.org/dist/v6.2.0/node-v6.2.0-linux-x64.tar.xz \
-	&& tar -xzvf node-v6.2.0-linux-x64.tar.xz && rm -f node-v6.2.0-linux-x64.tar.xz \
+	&& tar -xvf node-v6.2.0-linux-x64.tar.xz && rm -f node-v6.2.0-linux-x64.tar.xz \
 	&& cd node-v6.2.0 \
 	&& ./configure \
 	&& make -j $(cat /proc/cpuinfo | grep processor | wc -l)\
