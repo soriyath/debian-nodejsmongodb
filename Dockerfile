@@ -2,7 +2,7 @@ FROM soriyath/debian-swissfr
 MAINTAINER Sumi Straessle
 
 RUN	DEBIAN_FRONTEND=noninteractive apt-get update \
-	&& apt-get install -y wget build-essential python mongodb mongodb-clients mongodb-server mongodb-dev
+	&& apt-get install -y --fix-missing wget build-essential python mongodb mongodb-clients mongodb-server mongodb-dev
 
 ADD mongodb.conf $ROOTFS/etc/mongodb.conf
 
