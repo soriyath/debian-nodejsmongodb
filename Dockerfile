@@ -12,7 +12,7 @@ RUN	DEBIAN_FRONTEND=noninteractive set -ex \
 	&& apt-get install -y wget build-essential
 WORKDIR /usr/local/src
 RUN DEBIAN_FRONTEND=noninteractive wget https://nodejs.org/dist/v4.4.5/node-v4.4.5-linux-x64.tar.xz \
-	&& tar -xzvf node-v4.4.5-linux-x64.tar.xz && rm -f node-v4.4.5-linux-x64.tar.xz \
+	&& tar -xvf node-v4.4.5-linux-x64.tar.xz && rm -f node-v4.4.5-linux-x64.tar.xz \
 	&& cd node-v4.4.5 \
 	&& ./configure \
 	&& make -j $(cat /proc/cpuinfo | grep processor | wc -l)\
