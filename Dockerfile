@@ -1,8 +1,10 @@
 FROM soriyath/debian-swissfr
 MAINTAINER Sumi Straessle
 
-RUN	DEBIAN_FRONTEND=noninteractive apt-get update \
-	&& apt-get install -y --fix-missing wget build-essential python mongodb mongodb-clients mongodb-server mongodb-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10 \
+	&& echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list \
+	&& apt-get -qq \
+	&& apt-get install -y --fix-missing wget build-essential python mongodb-org=3.0.1 mongodb-org-server=3.0.1 mongodb-org-shell=3.0.1 mongodb-org-mongos=3.0.1 mongodb-org-tools=3.0.1
 
 ADD mongodb.conf $ROOTFS/etc/mongodb.conf
 
@@ -17,6 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive wget https://nodejs.org/dist/v6.2.0/node-v6.2
 	&& ./configure \
 	&& make -j $(cat /proc/cpuinfo | grep processor | wc -l)\
 	&& make install
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean \
 	&& apt-get autoremove \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
