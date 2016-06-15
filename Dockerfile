@@ -4,8 +4,7 @@ MAINTAINER Sumi Straessle
 RUN DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10 \
 	&& echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 
-RUN DEBIAN_FRONTEND=noninteractive 
-	&& apt-get -qq \
+RUN DEBIAN_FRONTEND=noninteractive apt-get -qq \
 	&& apt-get install -y --fix-missing wget build-essential python mongodb-org=3.0.1 mongodb-org-server=3.0.1 mongodb-org-shell=3.0.1 mongodb-org-mongos=3.0.1 mongodb-org-tools=3.0.1
 
 ADD mongodb.conf $ROOTFS/etc/mongodb.conf
