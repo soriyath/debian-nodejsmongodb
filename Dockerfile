@@ -27,4 +27,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get clean \
 WORKDIR /srv/www
 EXPOSE 27017 28017
 
-CMD service mongodb start && tail -f /var/log/mongodb/mongodb.log 
+# Supervisor config file
+ADD mongodb.sv.conf /etc/supervisor/conf.d/mongodb.sv.conf
+
+# default command
+CMD ["supervisord", "-c", "/etc/supervisor.conf"]
