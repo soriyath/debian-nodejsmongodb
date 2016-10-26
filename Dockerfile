@@ -5,7 +5,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver hkp://keyserver.ubunt
 	&& echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq \
-	&& apt-get install -y --fix-missing wget build-essential python mongodb-org=3.2.9 mongodb-org-server=3.2.9 mongodb-org-shell=3.2.9 mongodb-org-mongos=3.2.9 mongodb-org-tools=3.2.9
+	&& apt-get install -y --fix-missing wget build-essential python mongodb-org
 
 ADD mongodb.conf $ROOTFS/etc/mongodb.conf
 
