@@ -9,14 +9,14 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq \
 
 ADD mongodb.conf $ROOTFS/etc/mongodb.conf
 
-# NODEJS 4.
+# NODEJS 4
 RUN	DEBIAN_FRONTEND=noninteractive set -ex \
 	&& apt-get update \
 	&& apt-get install -y wget build-essential
 WORKDIR /usr/local/src
-RUN DEBIAN_FRONTEND=noninteractive wget https://nodejs.org/dist/v4.5.0/node-v4.5.0.tar.gz \
-	&& tar -xzf node-v4.5.0.tar.gz && rm -f node-v4.5.0.tar.gz \
-	&& cd node-v4.5.0 \
+RUN DEBIAN_FRONTEND=noninteractive wget https://nodejs.org/dist/v4.6.1/node-v4.6.1.tar.gz \
+	&& tar -xzf node-v4.6.1.tar.gz && rm -f node-v4.6.1.tar.gz \
+	&& cd node-v4.6.1 \
 	&& ./configure \
 	&& make -j $(cat /proc/cpuinfo | grep processor | wc -l)\
 	&& make install
