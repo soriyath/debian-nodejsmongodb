@@ -16,9 +16,9 @@ RUN	set -ex \
 	&& apt-get update \
 	&& apt-get install -y wget build-essential
 WORKDIR /usr/local/src
-RUN wget https://nodejs.org/dist/v6.9.1/node-v6.9.1.tar.gz \
-	&& tar -xzvf node-v6.9.1.tar.gz && rm -f node-v6.9.1.tar.gz \
-	&& cd node-v6.9.1 \
+RUN wget https://nodejs.org/dist/v7.0.0/node-v7.0.0.tar.gz \
+	&& tar -xzvf node-v7.0.0.tar.gz && rm -f node-v7.0.0.tar.gz \
+	&& cd node-v7.0.0 \
 	&& ./configure \
 	&& make -j $(cat /proc/cpuinfo | grep processor | wc -l)\
 	&& make install
