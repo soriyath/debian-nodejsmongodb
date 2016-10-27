@@ -7,7 +7,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
 	&& echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
 RUN apt-get update -qq \
-	&& apt-get install -y --fix-missing wget build-essential python mongodb-org=3.2.9 mongodb-org-server=3.2.9 mongodb-org-shell=3.2.9 mongodb-org-mongos=3.2.9 mongodb-org-tools=3.2.9
+	&& apt-get install -y --fix-missing wget build-essential python mongodb-org
 
 ADD mongodb.conf $ROOTFS/etc/mongodb.conf
 
@@ -16,9 +16,9 @@ RUN	set -ex \
 	&& apt-get update \
 	&& apt-get install -y wget build-essential
 WORKDIR /usr/local/src
-RUN wget https://nodejs.org/dist/v6.6.0/node-v6.6.0.tar.gz \
-	&& tar -xzvf node-v6.6.0.tar.gz && rm -f node-v6.6.0.tar.gz \
-	&& cd node-v6.6.0 \
+RUN wget https://nodejs.org/dist/v6.9.1/node-v6.9.1.tar.gz \
+	&& tar -xzvf node-v6.9.1.tar.gz && rm -f node-v6.9.1.tar.gz \
+	&& cd node-v6.9.1 \
 	&& ./configure \
 	&& make -j $(cat /proc/cpuinfo | grep processor | wc -l)\
 	&& make install
