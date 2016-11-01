@@ -9,7 +9,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
 RUN apt-get update -qq \
 	&& apt-get install -y --fix-missing wget build-essential python mongodb-org
 
-ADD mongodb.conf $ROOTFS/etc/mongodb.conf
+ADD mongod.conf $ROOTFS/etc/mongod.conf
 
 # NODEJS 6.6.0
 RUN	set -ex \
