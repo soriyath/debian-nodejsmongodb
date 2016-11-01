@@ -1,26 +1,28 @@
 FROM soriyath/debian-swissfr
 MAINTAINER Sumi Straessle
 
-RUN DEBIAN_FRONTEND=noninteractive apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 \
 	&& echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.2 main" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq \
+RUN apt-get update -qq \
 	&& apt-get install -y --fix-missing wget build-essential python mongodb-org
 
-ADD mongodb.conf $ROOTFS/etc/mongodb.conf
+ADD mongod.conf $ROOTFS/etc/mongod.conf
 
 # NODEJS 4
 RUN	DEBIAN_FRONTEND=noninteractive set -ex \
 	&& apt-get update \
 	&& apt-get install -y wget build-essential
 WORKDIR /usr/local/src
-RUN DEBIAN_FRONTEND=noninteractive wget https://nodejs.org/dist/v4.6.1/node-v4.6.1.tar.gz \
+RUN wget https://nodejs.org/dist/v4.6.1/node-v4.6.1.tar.gz \
 	&& tar -xzf node-v4.6.1.tar.gz && rm -f node-v4.6.1.tar.gz \
 	&& cd node-v4.6.1 \
 	&& ./configure \
 	&& make -j $(cat /proc/cpuinfo | grep processor | wc -l)\
 	&& make install
-RUN DEBIAN_FRONTEND=noninteractive apt-get clean \
+RUN apt-get clean \
 	&& apt-get autoremove \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
